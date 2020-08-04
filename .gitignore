@@ -1,0 +1,8 @@
+/include/
+/lib/
+/x64/
+
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+.DS_Store
