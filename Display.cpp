@@ -22,7 +22,7 @@
            SDL_Quit();
        }
        this->terminer = false;
-       this->game = new Game(renderer);
+       
        this->police = TTF_OpenFont(fileFont.c_str(), 24);
        if (!this->police) {
            logSDLError(std::cout, "Font not loaded");
@@ -33,6 +33,7 @@
        }
        SDL_Surface* ico = SDL_LoadBMP("./img/ico.bmp");
        SDL_SetWindowIcon(fenetre, ico);
+       this->game = new Game(renderer,police);
     }
 
     void Display::run() {
@@ -124,16 +125,19 @@
                                     game->grid->cases[x][y]->showing = STATE::MINETRIGGER;
                                     game->grid->revealMine();
                                     game->stand = STAND::GAMEOVER;
+                                    
                                 }
+                                game->checkWin();
                             }
                         }
                         else if (evenements.button == SDL_BUTTON_RIGHT) {
                             if (game->grid->cases[x][y]->showing == STATE::NOTREVEAL) {
                                 game->grid->cases[x][y]->showing = STATE::FLAG;
-
+                                game->ui->flag--;
                             }
                             else if (game->grid->cases[x][y]->showing == STATE::FLAG) {
                                 game->grid->cases[x][y]->showing = STATE::NOTREVEAL;
+                                game->ui->flag++;
                             }
                         }
                         break;
@@ -144,6 +148,7 @@
         }
         else if(game->stand == STAND::START) game->playButton->isClicked(evenements,game);
         else if (game->stand == STAND::GAMEOVER) game->resetButton->isClicked(evenements,game);
+        else if (game->stand == STAND::WIN) game->resetButton->isClicked(evenements, game);
 
        
     }

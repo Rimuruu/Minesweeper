@@ -52,12 +52,11 @@ void Grid::revealMine() {
 }
 
 void Grid::init(int mine) {
-	int minecount = 100;
+	int minecount = mine;
 	while (minecount > 0) {
 		int xmine = rand() % 29 + 0;
 		int ymine = rand() % 21 + 0;
 		if(cases[xmine][ymine]->content != STATE::MINE ){
-			std::cout << xmine << " " << ymine << std::endl;
 			cases[xmine][ymine]->content = STATE::MINE;
 			minecount--;
 		}

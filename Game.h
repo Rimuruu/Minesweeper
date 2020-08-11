@@ -3,7 +3,7 @@
 #include "TextureLoader.h"
 #include "Grid.h"
 #include "Button.h"
-
+#include "UI.h"
 
 enum class STAND {
 	GAMEOVER = 0,
@@ -19,12 +19,16 @@ public:
 	Button_reset* resetButton;
 	SDL_Renderer* renderer;
 	SDL_Texture* gameover;
+	SDL_Texture* win;
+	SDL_Texture* bg;
 	STAND stand;
+	UI* ui;
 	int mine;
-	Game(SDL_Renderer *renderer);
+	Game(SDL_Renderer *renderer, TTF_Font* police);
 	void render();
 	void play();
 	void reset();
+	void checkWin();
 
 
 

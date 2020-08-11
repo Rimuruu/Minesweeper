@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Display.h"
 #include <SDL_ttf.h>
+#include "Resource.h"
+
 
 int main(int argc, char** argv)
 {
